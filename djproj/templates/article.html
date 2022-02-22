@@ -1,0 +1,44 @@
+{%extends 'flatpages/default.html'%}
+
+{% block title %}
+Articles
+{% endblock title %}
+
+{% block content %}
+<h1>{{ article.title }}</h1>
+{% if article %}
+        <table>
+            <tr>
+                <td>
+                    <b>Заголовок</b>
+                </td>
+                <td>
+                    <b>Описание</b>
+                </td>
+                <td>
+                    <b>Дата и время публикации</b>
+                </td>
+                <td>
+                    <b>Категория</b>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    {{ article.name }}
+                </td>
+                <td>
+                    {{ article.description | truncatechars:50 | censor }}
+                </td>
+                <td>
+                    {{ article.datetime | date:'d-M-Y' }}
+                    {{ article.datetime | time:'H:i' }}
+                </td>
+                <td>
+                    {{ article.category.name | censor }}
+                </td>
+            </tr>
+        </table>
+    {% else %}
+        <h2>Здесь новости нет:(</h2>
+    {% endif %}
+{% endblock content %}
